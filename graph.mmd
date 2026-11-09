@@ -1,0 +1,35 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	understand(understand)
+	geocode(geocode)
+	fetch_current(fetch_current)
+	fetch_forecast(fetch_forecast)
+	respond(respond)
+	chitchat(chitchat)
+	ask_city(ask_city)
+	handle_error(handle_error)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> understand;
+	fetch_current -.-> handle_error;
+	fetch_current -.-> respond;
+	fetch_forecast -.-> handle_error;
+	fetch_forecast -.-> respond;
+	geocode -.-> fetch_current;
+	geocode -.-> fetch_forecast;
+	geocode -.-> handle_error;
+	understand -.-> ask_city;
+	understand -.-> chitchat;
+	understand -.-> geocode;
+	ask_city --> __end__;
+	chitchat --> __end__;
+	handle_error --> __end__;
+	respond --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
+
